@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Brain Tumor Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="result-card">
+
+        <h1>🧠 Brain Tumor Detection Result</h1>
+
+        {% if image %}
+
+        <img src="{{ url_for('static', filename='uploads/' + image) }}"
+             class="result-image"
+             alt="MRI Image">
+
+        {% endif %}
+
+        <div class="prediction-box">
+
+            <h2>Prediction</h2>
+
+            <h3>{{ prediction }}</h3>
+
+            <h2>Confidence</h2>
+
+            <h3>{{ confidence }}</h3>
+
+        </div>
+
+        {% if probabilities %}
+
+        <div class="prediction-box">
+
+            <h2>Prediction Probabilities</h2>
+
+            <table class="probability-table">
+
+                <tr>
+                    <th>Class</th>
+                    <th>Probability</th>
+                </tr>
+
+                {% for cls, prob in probabilities.items() %}
+
+                <tr>
+
+                    <td>{{ cls }}</td>
+
+                    <td>{{ prob }}%</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+        <br>
+
+        <a href="/">
+
+            <button>
+
+                Predict Another Image
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
